@@ -20,6 +20,7 @@ const hideH1 = () => {
 
 const showH1 = () => {
   h1Task.removeAttribute("class", "h1taskHid")
+  h1Task.setAttribute("class", "h1task")
 }
 
 const addOrUpdateTask = () => {
