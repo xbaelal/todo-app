@@ -9,9 +9,18 @@ const tasksContainer = document.getElementById("tasks-container");
 const titleInput = document.getElementById("title-input");
 const dateInput = document.getElementById("date-input");
 const descriptionInput = document.getElementById("description-input");
+const h1Task = document.getElementById("h1task")
 
 const taskData = JSON.parse(localStorage.getItem("data")) || [];
 let currentTask = {};
+
+const hideH1 = () => {
+  h1Task.setAttribute("class", "h1taskHid")
+};
+
+const showH1 = () => {
+  h1Task.removeAttribute("class", "h1taskHid")
+}
 
 const addOrUpdateTask = () => {
   const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
@@ -24,6 +33,7 @@ const addOrUpdateTask = () => {
 
   if (dataArrIndex === -1) {
     taskData.unshift(taskObj);
+    hideH1()
   } else {
     taskData[dataArrIndex] = taskObj;
   }
@@ -60,6 +70,9 @@ const deleteTask = (buttonEl) => {
   buttonEl.parentElement.remove();
   taskData.splice(dataArrIndex, 1);
   localStorage.setItem("data", JSON.stringify(taskData));
+  if(!taskData.length){
+    showH1()
+  }
 }
 
 const editTask = (buttonEl) => {
